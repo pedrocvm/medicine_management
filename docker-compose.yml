@@ -1,0 +1,35 @@
+version: "3.3"
+
+services:
+  postgres:
+    image: postgres:13
+    container_name: Postgres
+    restart: unless-stopped
+    ports:
+      - ${DB_PORT}:5432
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+
+  api:
+    build: ./backend
+    container_name: Backend
+    command: sh -c "npm run start"
+    volumes:
+      - .:/usr/app
+    ports:
+      - ${PORT}:${PORT}
+    depends_on:
+      - postgres
+    links:
+      - postgres
+    environment:
+      PORT: ${PORT}
+      DB_HOST: ${DB_HOST}
+      DB_PORT: ${DB_PORT}
+      DB_NAME: ${DB_NAME}
+      DB_USERNAME: ${DB_USERNAME}
+      DB_PASSWORD: ${DB_PASSWORD}

@@ -1,0 +1,52 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type MedicineEntity {
+  id: ID!
+  name: String!
+  description: String!
+  dayPeriod: DayPeriodEnum!
+  doses: Float!
+  interval: Float!
+  CreatedAt: DateTime!
+  UpdatedAt: DateTime!
+}
+
+enum DayPeriodEnum {
+  MORNING
+  AFTERNOON
+  NIGHT
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  findAllMedicine: [MedicineEntity!]!
+  findMedicine(id: String!): MedicineEntity!
+}
+
+type Mutation {
+  createMedicine(data: CreateMedicineInput!): MedicineEntity!
+  updateMedicine(data: UpdateMedicineInput!, id: String!): MedicineEntity!
+  deleteMedicine(id: String!): Boolean!
+}
+
+input CreateMedicineInput {
+  name: String!
+  description: String!
+  dayPeriod: DayPeriodEnum!
+  interval: Float!
+  doses: Float!
+}
+
+input UpdateMedicineInput {
+  name: String
+  description: String
+  dayPeriod: DayPeriodEnum
+  interval: Float
+  doses: Float
+}
