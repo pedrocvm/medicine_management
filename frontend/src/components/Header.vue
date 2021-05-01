@@ -2,21 +2,19 @@
   <v-bottom-navigation horizontal>
 
     <v-btn icon>
-    <router-link>
-      <v-icon>mdi-history</v-icon>
-      <span>Recents</span>
+    <router-link to="/home">
+      <v-icon>mdi-home</v-icon>
+      <span>Home</span>
     </router-link>
     </v-btn>
 
     <v-btn icon>
-      <v-icon>mdi-heart</v-icon>
-      <span>Favorites</span>
+    <router-link to="/register">
+      <v-icon>mdi-plus</v-icon>
+      <span>Register</span>
+    </router-link>
     </v-btn>
 
-    <v-btn icon>
-      <v-icon>mdi-map-marker</v-icon>
-      <span>Nearby</span>
-    </v-btn>
   </v-bottom-navigation>
 </template>
 
@@ -37,15 +35,10 @@ export default {};
   span {
     color: #eee !important;
   }
-  .v-btn__content {
-    display: flex;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: center !important;
 
-    i {
-      margin: 0 !important;
-    }
+  a {
+    @include flexbox(column, center, center);
+
   }
 }
 </style>
