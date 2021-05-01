@@ -8,10 +8,4 @@ module.exports = {
   entities: ['dist/**/*.entity{.ts,.js}'],
   synchronize: true,
   logging: false,
-  ssl: true,
-  extra: {
-    ssl: {
-      rejectUnauthorized: false,
-    },
-  },
 };
