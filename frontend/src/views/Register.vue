@@ -5,7 +5,7 @@
         <v-row>
           <v-col>
             <v-text-field
-              placeholder="insira o nome do medicamento"
+              placeholder="Nome do medicamento"
               outlined
               label="Nome"
               hide-details="auto"
@@ -13,7 +13,7 @@
           </v-col>
           <v-col>
             <v-text-field
-              placeholder="Insira a quantidade de medicamento a ser ministrada ao dia "
+              placeholder="Quantidade ao dia "
               outlined
               label="Posologia"
               hide-details="auto"
@@ -70,13 +70,14 @@
             <v-btn color="warning" elevation="2">Limpar</v-btn>
           </v-col>
         </v-row>
-
       </v-form>
     </v-card>
   </div>
 </template>
 
 <script>
+import { MedicineService } from '@/services/medicine.service';
+
 export default {
   data() {
     return {
@@ -97,6 +98,21 @@ export default {
       uniqueDose: false,
     };
   },
+
+  created() {
+    const query = `
+      {
+        findAllMedicine {
+          id name description dayPeriod
+          doses interval
+        }
+      }
+    `;
+
+    MedicineService.list(query).then((result) => {
+      console.log(result);
+    });
+  },
 };
 </script>
 
@@ -114,6 +130,12 @@ export default {
   .actionWrapper {
     @include flexbox(row, center, center);
     gap: 30px;
+  }
+
+  .infoBtn {
+    i {
+      color: black;
+    }
   }
 }
 </style>
