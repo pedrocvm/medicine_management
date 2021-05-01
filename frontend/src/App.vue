@@ -1,11 +1,11 @@
 <template>
   <v-app>
-    <Header />
     <v-main>
       <transition name="fade">
         <router-view></router-view>
       </transition>
     </v-main>
+    <Header />
   </v-app>
 </template>
 
@@ -20,9 +20,7 @@ export default Vue.extend({
     Header,
   },
 
-  data: () => ({
-
-  }),
+  data: () => ({}),
 });
 </script>
 

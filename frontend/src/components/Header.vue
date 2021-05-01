@@ -38,7 +38,9 @@ export default {};
 
   a {
     @include flexbox(column, center, center);
-
+    gap: 2px;
+    font-size: 14px;
+    text-decoration-line: none;
   }
 }
 </style>
