@@ -66,8 +66,8 @@
 
         <v-row>
           <v-col class="actionWrapper">
-            <v-btn color="warning" elevation="2">Enviar</v-btn>
-            <v-btn color="primary" elevation="2">Limpar</v-btn>
+            <v-btn color="primary" elevation="2">Enviar</v-btn>
+            <v-btn color="warning" elevation="2">Limpar</v-btn>
           </v-col>
         </v-row>
 
