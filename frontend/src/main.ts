@@ -4,11 +4,8 @@ import './registerServiceWorker';
 import router from './router';
 import store from './store';
 import vuetify from './plugins/vuetify';
-import { ApiService } from './services/api.services';
 
 Vue.config.productionTip = false;
-
-ApiService.init('http://localhost:3350/api/graphql');
 
 new Vue({
   router,

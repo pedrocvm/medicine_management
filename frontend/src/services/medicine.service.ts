@@ -11,7 +11,12 @@ export const MedicineService = {
 
   get: (id: string) => {},
 
-  post: (data: IMedicine) => {},
+  post: async (medicine: IMedicine) => {
+    const {
+      data: { data },
+    } = await ApiService.mutation(medicine);
+    return data.createMedicine;
+  },
 
   put: (id: string, data: IMedicine) => {},
 
