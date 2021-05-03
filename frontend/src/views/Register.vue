@@ -46,7 +46,11 @@
 
         <v-row>
           <v-col>
-            <v-checkbox v-model="uniqueDose" label="Dose Única"></v-checkbox>
+            <v-checkbox
+              v-model="uniqueDose"
+              label="Dose Única"
+              @change="handleUniqueDose()"
+            ></v-checkbox>
           </v-col>
 
           <v-col v-if="!uniqueDose">
@@ -77,7 +81,11 @@
 
         <v-row>
           <v-col class="actionWrapper">
-            <v-btn color="primary" elevation="2" @click="submit()"
+            <v-btn
+              color="primary"
+              elevation="2"
+              @click="submit()"
+              :disabled="isDisabled()"
               >Enviar</v-btn
             >
             <v-btn color="warning" elevation="2" @click="clear()">Limpar</v-btn>
@@ -214,6 +222,27 @@ export default {
     clear() {
       const vm = this;
       vm.$refs.medicine.reset();
+    },
+
+    isDisabled() {
+      const vm = this;
+
+      const { name, description, dayPeriod, interval, doses } = vm.medicine;
+      if (!name || !description || !dayPeriod || !interval || !doses) {
+        return true;
+      }
+    },
+
+    handleUniqueDose() {
+      const vm = this;
+
+      if (vm.uniqueDose) {
+        vm.medicine.interval = 24;
+        vm.medicine.doses = 1;
+      } else {
+        vm.medicine.interval = '';
+        vm.medicine.doses = '';
+      }
     },
   },
 
