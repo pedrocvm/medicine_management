@@ -1,19 +1,28 @@
 import axios from 'axios';
 
 export const ApiService = {
-  init(baseURL: string) {
-    axios.defaults.baseURL = baseURL;
-  },
+  baseUrl: 'http://localhost:3350/api/graphql',
 
   query(query: any) {
     try {
       return axios({
         method: 'POST',
-        url: 'http://localhost:3350/api/graphql',
+        url: this.baseUrl,
         data: {
           query,
         },
       });
+    } catch (error) {
+      console.error(error.message);
+      throw new Error(error.message);
+    }
+  },
+
+  mutation(data: any) {
+    try {
+      return axios.post(this.baseUrl, {
+        query: data
+      })
     } catch (error) {
       console.error(error.message);
       throw new Error(error.message);

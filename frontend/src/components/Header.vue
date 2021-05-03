@@ -29,11 +29,11 @@ export default {};
   display: flex;
   justify-content: space-around !important;
   width: 100%;
-  background-color: navy !important;
+  background-color: $primary !important;
 
   .v-icon,
   span {
-    color: #eee !important;
+    color: $white !important;
   }
 
   a {
