@@ -11,7 +11,7 @@
     <v-btn icon>
     <router-link to="/register">
       <v-icon>mdi-plus</v-icon>
-      <span>Register</span>
+      <span>Cadastrar</span>
     </router-link>
     </v-btn>
 

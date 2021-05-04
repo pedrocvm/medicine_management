@@ -6,7 +6,7 @@
 
     <v-main>
       <transition name="fade">
-        <router-view></router-view>
+        <router-view class='routerView'></router-view>
       </transition>
     </v-main>
     <Header />
@@ -50,5 +50,11 @@ export default Vue.extend({
   position: fixed;
   right: 0;
   overflow: hidden;
+}
+
+.routerView{
+  width: 100%;
+  z-index: 1;
+  position: fixed;
 }
 </style>

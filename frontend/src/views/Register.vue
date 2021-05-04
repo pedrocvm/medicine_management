@@ -245,20 +245,6 @@ export default {
       }
     },
   },
-
-  created() {
-    // const query = `
-    //   {
-    //     findAllMedicine {
-    //       id name description dayPeriod
-    //       doses interval
-    //     }
-    //   }
-    // `;
-    // MedicineService.list(query).then((result) => {
-    //   console.log(result);
-    // });
-  },
 };
 </script>
 
@@ -266,7 +252,6 @@ export default {
 @import '../sass/master';
 
 .registerWrapper {
-  height: calc(100vh - 70px);
   padding: 30px;
 
   .v-card {
