@@ -20,6 +20,11 @@ const routes: Array<RouteConfig> = [
     name: 'Register',
     component: Register,
   },
+  {
+    path: '/register/:id',
+    name: 'EditRegister',
+    component: Register,
+  },
 ];
 
 const router = new VueRouter({

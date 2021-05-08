@@ -1,10 +1,11 @@
 <template>
-  <div class="registerWrapper">
+  <v-container class="registerWrapper">
     <v-card>
       <v-form :model="medicine" :rules="!id ? rules : {}" ref="medicine">
         <v-row>
           <v-col>
             <v-text-field
+              dense
               prop="name"
               required
               v-model="medicine.name"
@@ -18,6 +19,7 @@
         <v-row>
           <v-col>
             <v-select
+              dense
               prop="dayPeriod"
               required
               v-model="medicine.dayPeriod"
@@ -30,10 +32,12 @@
             >
             </v-select>
           </v-col>
+        </v-row>
 
-          <v-col>
+        <v-row>
+          <v-col v-if="!uniqueDose">
             <v-text-field
-              v-if="!uniqueDose"
+              dense
               hide-details
               prop="doses"
               v-model="medicine.doses"
@@ -45,16 +49,19 @@
         </v-row>
 
         <v-row>
-          <v-col>
-            <v-checkbox
-              v-model="uniqueDose"
-              label="Dose Única"
-              @change="handleUniqueDose()"
-            ></v-checkbox>
-          </v-col>
+          <v-checkbox
+            hide-details
+            v-model="uniqueDose"
+            label="Dose Única"
+            style="margin: 10px"
+            @change="handleUniqueDose()"
+          ></v-checkbox>
+        </v-row>
 
+        <v-row>
           <v-col v-if="!uniqueDose">
             <v-text-field
+              dense
               required
               prop="interval"
               v-model="medicine.interval"
@@ -69,6 +76,9 @@
         <v-row>
           <v-col>
             <v-textarea
+              dense
+              rows="3"
+              no-resize
               required
               prop="description"
               v-model="medicine.description"
@@ -84,27 +94,31 @@
             <v-btn
               color="primary"
               elevation="2"
-              @click="submit()"
+              @click="id ? update() : submit()"
               :disabled="isDisabled()"
-              >Enviar</v-btn
+              >{{ this.id ? 'Atualizar' : 'Enviar' }}</v-btn
+            >
+            <v-btn
+              color="warning"
+              elevation="2"
+              @click="$router.replace({ name: 'Home' })"
+              >Cancelar</v-btn
             >
             <v-btn color="warning" elevation="2" @click="clear()">Limpar</v-btn>
           </v-col>
         </v-row>
       </v-form>
     </v-card>
-  </div>
+  </v-container>
 </template>
 
 <script>
 import { mapActions } from 'vuex';
 import { MedicineService } from '@/services/medicine.service';
-import Loader from '@/components/Loader';
+
 
 export default {
-  components: {
-    Loader,
-  },
+
   data() {
     return {
       id: '',
@@ -174,6 +188,31 @@ export default {
 
   methods: {
     ...mapActions(['handleLoad']),
+    get() {
+      const vm = this;
+      vm.handleLoad(true);
+
+      const query = `
+        {
+          findMedicine(
+            id: "${vm.id}"
+          ) {
+            id name description dayPeriod
+            doses interval
+          }
+        }
+      `;
+
+      MedicineService.get(query)
+        .then((res) => {
+          vm.medicine = res;
+          if (vm.medicine.doses == 1 && vm.medicine.interval == 24) {
+            vm.uniqueDose = true;
+          }
+        })
+        .finally(() => vm.handleLoad(false));
+    },
+
     submit() {
       const vm = this;
       vm.handleLoad(true);
@@ -211,12 +250,54 @@ export default {
 
             setTimeout(() => {
               vm.$router.replace({ name: 'Home' });
-            }, 1000);
+            });
           }, 1000);
         }
       });
+    },
 
-      console.log(vm.medicine);
+    update() {
+      const vm = this;
+      vm.handleLoad(true);
+
+      if (vm.uniqueDose) {
+        vm.medicine.doses = 1;
+        vm.medicine.interval = 24;
+      }
+
+      vm.medicine.interval = +vm.medicine.interval;
+      vm.medicine.doses = +vm.medicine.doses;
+
+      const { name, description, dayPeriod, interval, doses } = vm.medicine;
+
+      const mutation = `
+        mutation {
+          updateMedicine(
+            id: "${vm.id}"
+            data: {
+              name: "${name}",
+              description: "${description}",
+              dayPeriod: ${dayPeriod},
+              interval: ${interval},
+              doses: ${doses}
+            }
+          ){
+            id name description dayPeriod
+            doses interval
+          }
+        }`;
+
+      MedicineService.update(mutation).then((response) => {
+        if (response) {
+          setTimeout(() => {
+            vm.handleLoad(false);
+
+            setTimeout(() => {
+              vm.$router.replace({ name: 'Home' });
+            });
+          }, 1000);
+        }
+      });
     },
 
     clear() {
@@ -245,6 +326,13 @@ export default {
       }
     },
   },
+  mounted() {
+    const vm = this;
+    vm.id = vm.$route.params.id;
+    if (vm.id) {
+      vm.get();
+    }
+  },
 };
 </script>
 
@@ -255,7 +343,9 @@ export default {
   padding: 30px;
 
   .v-card {
-    padding: 30px;
+    padding: 20px;
+    max-height: 530px;
+    overflow: scroll;
   }
 
   .actionWrapper {

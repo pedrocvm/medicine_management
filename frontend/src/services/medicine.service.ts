@@ -9,7 +9,13 @@ export const MedicineService = {
     return data.findAllMedicine;
   },
 
-  get: (id: string) => {},
+  get: async (query: string) => {
+    const {
+      data: { data },
+    } = await ApiService.query(query);
+
+    return data.findMedicine;
+  },
 
   post: async (medicine: IMedicine) => {
     const {
@@ -18,7 +24,17 @@ export const MedicineService = {
     return data.createMedicine;
   },
 
-  put: (id: string, data: IMedicine) => {},
+  update: async (medicine: IMedicine) => {
+    const {
+      data: { data },
+    } = await ApiService.mutation(medicine);
+    return data.updateMedicine;
+  },
 
-  delete: (id: string) => {},
+  delete: async (query: string) => {
+    const {
+      data: { data },
+    } = await ApiService.mutation(query);
+    return data.deleteMedicine;
+  },
 };

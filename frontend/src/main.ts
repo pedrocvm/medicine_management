@@ -7,6 +7,13 @@ import vuetify from './plugins/vuetify';
 
 Vue.config.productionTip = false;
 
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    // This hides the address bar:
+    window.scrollTo(0, 1);
+  }, 0);
+});
+
 new Vue({
   router,
   store,

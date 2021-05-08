@@ -6,10 +6,13 @@
 
     <v-main>
       <transition name="fade">
-        <router-view class='routerView'></router-view>
+        <router-view class="routerView"></router-view>
       </transition>
     </v-main>
-    <Header />
+
+    <div class="headerWrapper">
+      <Header />
+    </div>
   </v-app>
 </template>
 
@@ -30,7 +33,7 @@ export default Vue.extend({
 });
 </script>
 
-<style lang='scss'>
+<style lang="scss">
 @import './sass/master';
 
 .fade-enter-active,
@@ -42,7 +45,7 @@ export default Vue.extend({
   opacity: 0;
 }
 
-.loaderWrapper{
+.loaderWrapper {
   z-index: 99;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.514);
@@ -52,9 +55,16 @@ export default Vue.extend({
   overflow: hidden;
 }
 
-.routerView{
+.routerView {
   width: 100%;
   z-index: 1;
   position: fixed;
+}
+
+.headerWrapper {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 2;
 }
 </style>
