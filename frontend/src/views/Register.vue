@@ -12,6 +12,7 @@
               outlined
               label="Nome"
               hide-details
+              color="#146A48"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -29,6 +30,7 @@
               :item-text="'label'"
               :item-value="'value'"
               hide-details
+              color="#146A48"
             >
             </v-select>
           </v-col>
@@ -39,6 +41,7 @@
             <v-text-field
               dense
               hide-details
+              color="#146A48"
               prop="doses"
               v-model="medicine.doses"
               type="number"
@@ -51,6 +54,7 @@
         <v-row>
           <v-checkbox
             hide-details
+            color="#146A48"
             v-model="uniqueDose"
             label="Dose Única"
             style="margin: 10px"
@@ -69,6 +73,7 @@
               outlined
               label="Intervalo"
               hide-details
+              color="#146A48"
             ></v-text-field>
           </v-col>
         </v-row>
@@ -85,6 +90,7 @@
               outlined
               label="Descrição"
               hide-details
+              color="#146A48"
             ></v-textarea>
           </v-col>
         </v-row>
@@ -94,15 +100,10 @@
             <v-btn
               color="primary"
               elevation="2"
+              aria-label="action button"
               @click="id ? update() : submit()"
               :disabled="isDisabled()"
               >{{ this.id ? 'Atualizar' : 'Enviar' }}</v-btn
-            >
-            <v-btn
-              color="warning"
-              elevation="2"
-              @click="$router.replace({ name: 'Home' })"
-              >Cancelar</v-btn
             >
             <v-btn color="warning" elevation="2" @click="clear()">Limpar</v-btn>
           </v-col>
@@ -116,9 +117,7 @@
 import { mapActions } from 'vuex';
 import { MedicineService } from '@/services/medicine.service';
 
-
 export default {
-
   data() {
     return {
       id: '',

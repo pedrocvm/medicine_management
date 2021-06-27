@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 export const ApiService = {
-  // baseUrl: 'http://localhost:3350/api/graphql',
-  baseUrl: 'https://app-medicine-api.herokuapp.com/api/graphql',
+  baseUrl: 'http://localhost:3350/api/graphql',
+  // baseUrl: 'https://app-medicine-api.herokuapp.com/api/graphql',
 
   query(query: any) {
     try {
@@ -13,7 +13,7 @@ export const ApiService = {
           query,
         },
       });
-    } catch (error) {
+    } catch (error: any) {
       console.error(error.message);
       throw new Error(error.message);
     }
@@ -22,9 +22,9 @@ export const ApiService = {
   mutation(data: any) {
     try {
       return axios.post(this.baseUrl, {
-        query: data
-      })
-    } catch (error) {
+        query: data,
+      });
+    } catch (error: any) {
       console.error(error.message);
       throw new Error(error.message);
     }

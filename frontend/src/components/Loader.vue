@@ -27,7 +27,7 @@ export default {
 .loaderWrapper {
   @include flexbox(column, center, center);
   width: 100%;
-  height: 100%;
+  height: 100vh;
   overflow: hidden;
   gap: 5px;
 

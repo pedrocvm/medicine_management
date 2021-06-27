@@ -1,10 +1,17 @@
 <template>
-  <v-data-table :headers="headers" :items="items" :search="search">
+  <v-data-table
+    :headers="headers"
+    :items="items"
+    :search="search"
+    fixed-header
+    height="60vh"
+    color="#146A48"
+  >
     <template v-slot:[`item.actions`]="{ item }">
-      <v-icon small class="mr-2" @click="editItem(item)">
+      <v-icon small class="mr-2" @click="editItem(item)" aria-label='edit button'>
         mdi-pencil
       </v-icon>
-      <v-icon small @click="deleteItem(item)">
+      <v-icon small @click="deleteItem(item)" aria-label="delete button">
         mdi-delete
       </v-icon>
     </template>
@@ -13,7 +20,6 @@
 
 <script>
 import { mapActions } from 'vuex';
-import { MedicineService } from '@/services/medicine.service';
 
 export default {
   props: ['headers', 'items', 'search', 'delete'],
@@ -38,5 +44,3 @@ export default {
   },
 };
 </script>
-
-<style></style>

@@ -6,8 +6,8 @@
           v-model="search"
           append-icon="mdi-magnify"
           label="Pesquisar"
-          single-line
           hide-details
+          color="#146A48"
         ></v-text-field>
       </v-card-title>
 
@@ -127,11 +127,12 @@ export default {
 
 .homeWrapper {
   height: calc(100vh - 70px);
-  padding: 12px;
+  padding: 10px;
 
   .v-card {
-    padding: 20px;
-    max-height: 530px;
+    margin-top: 5px;
+    padding: 0 20px;
+    height: 100%;
     overflow: scroll;
   }
 

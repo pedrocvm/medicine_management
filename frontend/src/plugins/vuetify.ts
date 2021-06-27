@@ -8,6 +8,14 @@ const vuetify = new Vuetify({
     locales: { pt },
     current: 'pt',
   },
+  theme: {
+    themes: {
+      light: {
+
+        primary: '#146A48',
+      },
+    },
+  },
 });
 
 Vue.use(Vuetify);
