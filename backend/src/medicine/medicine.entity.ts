@@ -38,7 +38,9 @@ export class MedicineEntity {
   @Column()
   doses: number;
 
-  @Column()
+  @Column({
+    default: 0,
+  })
   quantity: number;
 
   @Column()
