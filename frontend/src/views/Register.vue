@@ -1,6 +1,9 @@
 <template>
-  <v-container class="registerWrapper">
+  <div class="registerWrapper">
     <v-card>
+      <v-card-title>
+        Cadastrar Medicamento
+      </v-card-title>
       <v-form :model="medicine" :rules="!id ? rules : {}" ref="medicine">
         <v-row>
           <v-col>
@@ -94,23 +97,21 @@
             ></v-textarea>
           </v-col>
         </v-row>
-
-        <v-row>
-          <v-col class="actionWrapper">
-            <v-btn
-              color="primary"
-              elevation="2"
-              aria-label="action button"
-              @click="id ? update() : submit()"
-              :disabled="isDisabled()"
-              >{{ this.id ? 'Atualizar' : 'Enviar' }}</v-btn
-            >
-            <v-btn color="warning" elevation="2" @click="clear()">Limpar</v-btn>
-          </v-col>
-        </v-row>
       </v-form>
+
+      <v-col class="actionWrapper">
+        <v-btn
+          color="primary"
+          elevation="2"
+          aria-label="action button"
+          @click="id ? update() : submit()"
+          :disabled="isDisabled()"
+          >{{ this.id ? 'Atualizar' : 'Enviar' }}</v-btn
+        >
+        <v-btn color="warning" elevation="2" @click="clear()">Limpar</v-btn>
+      </v-col>
     </v-card>
-  </v-container>
+  </div>
 </template>
 
 <script>
@@ -339,17 +340,30 @@ export default {
 @import '../sass/master';
 
 .registerWrapper {
-  padding: 30px;
+  padding: 30px 30px 0;
+  height: calc(100% - 90px);
 
   .v-card {
-    padding: 20px;
-    max-height: 530px;
-    overflow: scroll;
+    padding: 15px 20px 0;
+    height: 100%;
+    overflow: auto;
+    @include flexbox(column, center, space-between);
+
+    .v-card__title {
+      margin: -5px -5px 15px;
+      padding: 0;
+      font-size: 20px;
+    }
+
+    form {
+      width: 100%;
+    }
   }
 
   .actionWrapper {
     @include flexbox(row, center, center);
     gap: 30px;
+    align-self: flex-end;
   }
 
   .infoBtn {

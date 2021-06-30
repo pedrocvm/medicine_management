@@ -1,4 +1,4 @@
-# medicine
+# Remédios Eny
 
 ## Project setup
 ```

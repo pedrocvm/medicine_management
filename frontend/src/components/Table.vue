@@ -4,7 +4,7 @@
     :items="items"
     :search="search"
     fixed-header
-    height="60vh"
+    height="64vh"
     color="#146A48"
   >
     <template v-slot:[`item.actions`]="{ item }">

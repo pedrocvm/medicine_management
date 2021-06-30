@@ -8,6 +8,7 @@ type MedicineEntity {
   description: String!
   dayPeriod: DayPeriodEnum!
   doses: Float!
+  quantity: Float!
   interval: Float!
   CreatedAt: DateTime!
   UpdatedAt: DateTime!
@@ -41,6 +42,7 @@ input CreateMedicineInput {
   dayPeriod: DayPeriodEnum!
   interval: Float!
   doses: Float!
+  quantity: Float!
 }
 
 input UpdateMedicineInput {
@@ -49,4 +51,5 @@ input UpdateMedicineInput {
   dayPeriod: DayPeriodEnum
   interval: Float
   doses: Float
+  quantity: Float
 }

@@ -1,11 +1,12 @@
 {
-  "name": "medicine",
+  "name": "remedios_eny",
   "version": "0.1.0",
   "license": "MIT",
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "deploy": "aws s3 sync ./dist s3://eny-medicine"
   },
   "dependencies": {
     "axios": "^0.21.1",

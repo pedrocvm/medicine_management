@@ -2,7 +2,7 @@
   <v-bottom-navigation horizontal>
 
     <v-btn icon>
-    <router-link to="/home">
+    <router-link to="/">
       <v-icon>mdi-home</v-icon>
       <span>Home</span>
     </router-link>

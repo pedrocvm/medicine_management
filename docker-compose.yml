@@ -21,13 +21,13 @@ services:
     volumes:
       - .:/usr/app
     ports:
-      - ${PORT}:${PORT}
+      - ${APP_PORT}:${APP_PORT}
     depends_on:
       - postgres
     links:
       - postgres
     environment:
-      PORT: ${PORT}
+      APP_PORT: ${APP_PORT}
       DB_HOST: ${DB_HOST}
       DB_PORT: ${DB_PORT}
       DB_NAME: ${DB_NAME}

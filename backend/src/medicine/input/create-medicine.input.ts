@@ -23,6 +23,11 @@ export class CreateMedicineInput {
 
   @IsNumber()
   @IsPositive()
-  @IsNotEmpty({ message: 'Quantity of Doses is required' })
+  @IsNotEmpty({ message: 'Number of Doses is required' })
   doses: number;
+
+  @IsNumber()
+  @IsPositive()
+  @IsNotEmpty({ message: 'Quantity is required' })
+  quantity: number;
 }

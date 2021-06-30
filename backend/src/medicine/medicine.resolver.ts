@@ -29,7 +29,7 @@ export class MedicineResolver {
     @Args('id') id: string,
     @Args('data') data: UpdateMedicineInput,
   ): Promise<MedicineEntity> {
-    return this.service.update(id, data );
+    return this.service.update(id, data);
   }
 
   @Mutation(() => Boolean)

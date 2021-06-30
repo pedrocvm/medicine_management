@@ -1,17 +1,23 @@
 <template>
   <div class="homeWrapper">
     <v-card>
-      <v-card-title>
+      <v-card-title v-if='!!tableData.length'>
+        <h2>Medicamentos</h2>
         <v-text-field
           v-model="search"
           append-icon="mdi-magnify"
           label="Pesquisar"
           hide-details
           color="#146A48"
+          outlined
+          dense
         ></v-text-field>
       </v-card-title>
 
+      <h4 class='noDataMessage' v-if='!tableData.length'>Não há dados disponíveis</h4>
+
       <Table
+        v-if='!!tableData.length'
         :headers="headers"
         :items="tableData"
         :search="search"
@@ -127,17 +133,53 @@ export default {
 
 .homeWrapper {
   height: calc(100vh - 70px);
-  padding: 10px;
+  padding: 25px 30px;
 
   .v-card {
     margin-top: 5px;
-    padding: 0 20px;
     height: 100%;
-    overflow: scroll;
+    overflow: hidden;
   }
 
   .v-card__title {
     max-width: 300px;
+
+    .v-text-field {
+      padding-top: 0;
+      margin-top: 0;
+    }
+
+    h2{
+      margin: -5px auto 15px;
+      font-size: 20px;
+      font-weight: 500;
+    }
+  }
+
+  table {
+    tbody {
+      tr {
+        padding: 0 10px !important;
+
+        .v-icon{
+          font-size: 30px!important;
+        }
+
+        td:last-child{
+          min-width: 100px;
+
+          .v-icon:first-child{
+            color: $primary;
+            filter: brightness(130%);
+          }
+
+          .v-icon:last-child{
+            color: $red;
+            filter: brightness(130%);
+          }
+        }
+      }
+    }
   }
 
   @media (max-width: 599px) {
@@ -145,6 +187,11 @@ export default {
       margin: 0 auto;
       max-width: 100%;
     }
+  }
+
+  .noDataMessage{
+    height: 100%;
+    @include flexbox(row, center, center);
   }
 }
 </style>

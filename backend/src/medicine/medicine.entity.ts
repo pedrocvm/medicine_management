@@ -39,6 +39,9 @@ export class MedicineEntity {
   doses: number;
 
   @Column()
+  quantity: number;
+
+  @Column()
   interval: number;
 
   @CreateDateColumn()
